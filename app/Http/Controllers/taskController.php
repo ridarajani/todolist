@@ -14,12 +14,6 @@ class taskController extends Controller
         $task = Task::all();
         return view('layout',$this->data_view ,compact('task'));
     }
-    public function create(){
-        $this->data_view = [
-            'view' => 'task.create',
-        ];
-        return view('layout',$this->data_view);
-    }   
     public function store(){
         Task::create( request()->validate([
             'task' => ['required' , 'min:5']

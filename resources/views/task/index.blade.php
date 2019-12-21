@@ -26,4 +26,18 @@
         </li>
         @endforeach
 </ul>
-<a href="{{url('/task/create')}}">Add Task</a>
+<form method="post">
+    @csrf
+    <div>
+        <input type="text" name="task" placeholder="Enter you task here" value="{{ old('task')}}">
+    </div>
+    @if($errors->any())
+        @foreach ($errors->all() as $error)
+            <div>{{ $error}}</div>
+        @endforeach
+    @endif
+    <div>
+        <input type="submit" name="submit" value="Add Task">
+    </div>
+</form>
+{{-- <a href="{{url('/task/create')}}">Add Task</a> --}}
