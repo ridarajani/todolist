@@ -11,9 +11,11 @@
                 </form>
                 <p>{{$tasks->task}}</p>
             </div>
-            <div>
-                <a href="{{url('/task')}}{{'/'.$tasks->id.'/edit'}}">edit</a>
-            </div>
+            @if($tasks->completed == 0)
+                <div>
+                    <a href="{{url('/task')}}{{'/'.$tasks->id.'/edit'}}">edit</a>
+                </div>
+            @endif
             <div>
                 <form method="post" action="{{url('/task')}}{{'/'.$tasks->id}}">
                     @method('DELETE')

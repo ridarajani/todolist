@@ -27,19 +27,19 @@ class taskController extends Controller
         return view('layout',$this->data_view ,compact('task'));
     }
     public function update(Task $task){
-    
-        $task->update(request(['task']));
-
+        if(request()->has('task')){
+            $task->update(request()->validate([
+                'task' => ['required' , 'min:5']
+            ]));
+        }else{
+            $task->update([
+                'completed' => request()->has('completed')  
+            ]);
+        }
         return redirect('/task'); 
     }
     public function destroy(Task $task){
         $task->delete();
         return redirect('/task'); 
-    }
-    public function completed(Task $task){
-        $task->update([
-            'completed' => request()->has('completed')  
-        ]);
-        return back();
     }
 }
